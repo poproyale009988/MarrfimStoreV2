@@ -1,0 +1,38 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<div class="formbox wide">
+
+<h1>Configurações</h1>
+
+<form method="post">
+
+<label>Nome da loja</label>
+<input name="store_name" value="{{ settings.store_name }}">
+
+<label>Subtítulo</label>
+<input name="subtitle" value="{{ settings.subtitle }}">
+
+<label>Descrição</label>
+<textarea name="description">{{ settings.description }}</textarea>
+
+<h2>PIX</h2>
+
+<label>Chave PIX</label>
+<input name="pix_key" value="{{ settings.pix_key }}">
+
+<label>Instruções de pagamento</label>
+<textarea name="pix_instructions">{{ settings.pix_instructions }}</textarea>
+
+<button class="button large">
+Salvar configurações
+</button>
+
+</form>
+
+<a href="{{ url_for('admin') }}">← Voltar ao painel</a>
+
+</div>
+
+{% endblock %}

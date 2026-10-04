@@ -1,0 +1,46 @@
+﻿<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ settings.store_name if settings else "MARRFIM STORE" }}</title>
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="top">
+<div class="brand">
+<a href="{{ url_for('home') }}">MARRFIM STORE</a>
+</div>
+
+<nav>
+<a href="{{ url_for('home') }}">Início</a>
+<a href="{{ url_for('apps') }}">Aplicativos</a>
+<a href="{{ url_for('about') }}">Sobre</a>
+<a href="{{ url_for('support') }}">Suporte</a>
+<a href="{{ url_for('admin_login') }}">Admin</a>
+</nav>
+</header>
+
+<main class="container">
+
+{% with messages=get_flashed_messages() %}
+{% if messages %}
+<div class="messages">
+{% for message in messages %}
+<div class="message">{{ message }}</div>
+{% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+</main>
+
+<footer>
+MARRFIM STORE © 2026
+</footer>
+
+</body>
+</html>

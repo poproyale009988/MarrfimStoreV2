@@ -1,0 +1,53 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<div class="formbox">
+
+<span class="tag">PEDIDO #{{ order.id }}</span>
+
+<h1>{{ order.product_name }}</h1>
+
+<p><b>Cliente:</b> {{ order.customer_name }}</p>
+<p><b>E-mail:</b> {{ order.customer_email }}</p>
+<p><b>Pagamento:</b> {{ order.payment_method }}</p>
+<p><b>Valor:</b> R$ {{ "%.2f"|format(order.amount)|replace(".",",") }}</p>
+
+<div class="status">
+{{ order.status }}
+</div>
+
+{% if order.status=="PENDENTE" %}
+
+<h2>Pagamento</h2>
+
+<p>
+Seu pedido foi criado e está aguardando confirmação do pagamento.
+</p>
+
+{% if settings.pix_key %}
+<p><b>PIX:</b> {{ settings.pix_key }}</p>
+{% endif %}
+
+<p>{{ settings.pix_instructions }}</p>
+
+{% elif order.status=="PAGO" %}
+
+<h2>Download</h2>
+
+<p>Pagamento confirmado. Seu aplicativo está liberado.</p>
+
+<a class="button large"
+href="{{ url_for('download',token=order.token) }}">
+Baixar aplicativo
+</a>
+
+{% else %}
+
+<p>Este pedido foi cancelado.</p>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

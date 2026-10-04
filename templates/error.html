@@ -1,0 +1,17 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<div class="formbox center">
+
+<h1>{{ code }}</h1>
+
+<h2>{{ message }}</h2>
+
+<a class="button" href="{{ url_for('home') }}">
+Voltar para a loja
+</a>
+
+</div>
+
+{% endblock %}

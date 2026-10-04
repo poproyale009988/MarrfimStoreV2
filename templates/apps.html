@@ -1,0 +1,33 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Aplicativos</h1>
+
+<div class="grid">
+
+{% for p in products %}
+
+<article class="card">
+
+<div class="icon">M</div>
+
+<h2>{{ p.name }}</h2>
+
+<p>{{ p.description }}</p>
+
+<strong class="price">
+R$ {{ "%.2f"|format(p.price)|replace(".",",") }}
+</strong>
+
+<a class="button" href="{{ url_for('product',product_id=p.id) }}">
+Detalhes
+</a>
+
+</article>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

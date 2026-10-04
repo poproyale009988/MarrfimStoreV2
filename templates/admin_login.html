@@ -1,0 +1,29 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<div class="login">
+
+<h1>Administração</h1>
+
+<form method="post">
+
+<label>Usuário</label>
+<input name="username" value="admin" required>
+
+<label>Senha</label>
+<input type="password" name="password" required>
+
+<button class="button large">
+Entrar
+</button>
+
+</form>
+
+<p class="muted">
+Senha inicial: 123456
+</p>
+
+</div>
+
+{% endblock %}

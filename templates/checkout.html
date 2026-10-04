@@ -1,0 +1,37 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<div class="formbox">
+
+<h1>Comprar {{ product.name }}</h1>
+
+<p class="price">
+R$ {{ "%.2f"|format(product.price)|replace(".",",") }}
+</p>
+
+<form method="post">
+
+<label>Nome</label>
+<input name="name" required>
+
+<label>E-mail</label>
+<input type="email" name="email" required>
+
+<label>Forma de pagamento</label>
+
+<select name="payment">
+<option>PIX</option>
+<option>Mercado Pago</option>
+<option>Outro</option>
+</select>
+
+<button class="button large" type="submit">
+Criar pedido
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

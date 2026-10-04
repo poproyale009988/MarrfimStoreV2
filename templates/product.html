@@ -1,0 +1,46 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<div class="product">
+
+<div>
+<div class="bigicon">M</div>
+</div>
+
+<div>
+
+<span class="tag">WINDOWS</span>
+
+<h1>{{ product.name }}</h1>
+
+<p class="lead">{{ product.description }}</p>
+
+<div class="price big">
+R$ {{ "%.2f"|format(product.price)|replace(".",",") }}
+</div>
+
+<a class="button large" href="{{ url_for('checkout',product_id=product.id) }}">
+Comprar agora
+</a>
+
+<h2>Recursos</h2>
+
+<ul>
+{% for item in product.features.split("|") %}
+<li>{{ item }}</li>
+{% endfor %}
+</ul>
+
+<h2>Requisitos</h2>
+
+<p>{{ product.requirements.replace("|"," • ") }}</p>
+
+<p><b>Versão:</b> {{ product.version }}</p>
+<p><b>Sistema:</b> {{ product.os }}</p>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+<div>
+<span class="tag">LOJA OFICIAL</span>
+<h1>Aplicativos feitos para serem simples.</h1>
+<p>{{ settings.subtitle }}</p>
+
+<div class="actions">
+<a class="button" href="{{ url_for('apps') }}">Ver aplicativos</a>
+<a class="button secondary" href="{{ url_for('about') }}">Conheça a MARRFIM</a>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Aplicativos</h2>
+
+<div class="grid">
+
+{% for p in products %}
+
+<article class="card">
+
+<div class="icon">M</div>
+
+<h3>{{ p.name }}</h3>
+
+<p>{{ p.description }}</p>
+
+<div class="price">
+R$ {{ "%.2f"|format(p.price)|replace(".",",") }}
+</div>
+
+<a class="button" href="{{ url_for('product',product_id=p.id) }}">
+Ver aplicativo
+</a>
+
+</article>
+
+{% endfor %}
+
+</div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,131 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+
+<div class="adminhead">
+
+<div>
+<span class="tag">PAINEL</span>
+<h1>MARRFIM STORE</h1>
+</div>
+
+<div>
+<a class="button secondary" href="{{ url_for('home') }}">Ver loja</a>
+<a class="button secondary" href="{{ url_for('admin_config') }}">Configurações</a>
+<a class="button secondary" href="{{ url_for('admin_logout') }}">Sair</a>
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<span>Produtos</span>
+<strong>{{ total_products }}</strong>
+</div>
+
+<div class="stat">
+<span>Pedidos</span>
+<strong>{{ total_orders }}</strong>
+</div>
+
+<div class="stat">
+<span>Pendentes</span>
+<strong>{{ pending }}</strong>
+</div>
+
+<div class="stat">
+<span>Pagos</span>
+<strong>{{ paid }}</strong>
+</div>
+
+<div class="stat">
+<span>Vendas</span>
+<strong>R$ {{ "%.2f"|format(sales)|replace(".",",") }}</strong>
+</div>
+
+</div>
+
+<div class="adminsection">
+
+<div class="sectiontitle">
+<h2>Produtos</h2>
+<a class="button" href="{{ url_for('new_product') }}">+ Novo produto</a>
+</div>
+
+{% for p in products %}
+
+<div class="adminitem">
+
+<div>
+<strong>{{ p.name }}</strong>
+<span>V{{ p.version }} • R$ {{ "%.2f"|format(p.price)|replace(".",",") }}</span>
+</div>
+
+<div>
+<a class="button small" href="{{ url_for('edit_product',product_id=p.id) }}">
+Editar
+</a>
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="adminsection">
+
+<h2>Pedidos</h2>
+
+{% for o in orders %}
+
+<div class="orderitem">
+
+<div>
+<strong>#{{ o.id }} — {{ o.product_name }}</strong>
+<span>{{ o.customer_name }} — {{ o.customer_email }}</span>
+<span>R$ {{ "%.2f"|format(o.amount)|replace(".",",") }}</span>
+</div>
+
+<div class="orderactions">
+
+<span class="status">{{ o.status }}</span>
+
+<form method="post" action="{{ url_for('order_status',order_id=o.id,status='PAGO') }}">
+<button class="button small">PAGO</button>
+</form>
+
+<form method="post" action="{{ url_for('order_status',order_id=o.id,status='CANCELADO') }}">
+<button class="button small danger">CANCELAR</button>
+</form>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="adminsection">
+
+<h2>Segurança</h2>
+
+<form method="post" action="{{ url_for('change_password') }}" class="inlineform">
+
+<input type="password" name="password" placeholder="Nova senha" minlength="6" required>
+
+<button class="button">
+Alterar senha
+</button>
+
+</form>
+
+<a class="button secondary" href="{{ url_for('backup') }}">
+Baixar backup
+</a>
+
+</div>
+
+{% endblock %}
