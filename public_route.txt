@@ -1,0 +1,9 @@
+﻿
+# ==========================================================
+# ROTA PUBLICA PRINCIPAL - MARRFIM STORE
+# ==========================================================
+
+@app.route("/", methods=["GET"])
+def marrfim_store_home():
+    return render_template("index.html")
+

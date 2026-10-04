@@ -712,6 +712,10 @@ def public_checkout(product_id):
     </html>
     """
 
+
+@app.route("/", methods=["GET"])
+def marrfim_store_home():
+    return render_template("index.html")
 if __name__=="__main__":
     init_db()
     print("")
@@ -725,5 +729,6 @@ if __name__=="__main__":
     print("==============================================")
     print("")
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)), debug=False) # RENDER_PORT_CONFIG
+
 
 
